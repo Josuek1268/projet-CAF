@@ -3,7 +3,7 @@
 
 ## **Description**
 
-Ce projet a pour objectif de fournir aux équipes CAF un outil permettant d'identifier les tendances sur le thème "Risques cybernétiques et Intelligence Artificielle : quelles stratégies de défense face aux nouvelles menaces numériques ?", à l'occasion de la 4e édition du forum.
+Ce projet est un projet fictif qui a pour objectif de fournir aux équipes CAF un outil permettant d'identifier les tendances sur le thème "Risques cybernétiques et Intelligence Artificielle : quelles stratégies de défense face aux nouvelles menaces numériques ?", à l'occasion de la 4e édition du forum.
 
 L'outil extrait automatiquement des posts LinkedIn liés à des mots-clés spécifiques, les traite et les stocke dans une base de données PostgreSQL. Un tableau de bord a été créé dans Google Data Studio pour visualiser les données et aider à la prise de décision.
 
