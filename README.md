@@ -5,7 +5,7 @@
 
 Ce projet est un projet fictif qui a pour objectif de fournir aux équipes CAF un outil permettant d'identifier les tendances sur le thème "Risques cybernétiques et Intelligence Artificielle : quelles stratégies de défense face aux nouvelles menaces numériques ?", à l'occasion de la 4e édition du forum.
 
-L'outil extrait automatiquement des posts LinkedIn liés à des mots-clés spécifiques, les traite et les stocke dans une base de données PostgreSQL. Un tableau de bord a été créé dans Google Data Studio pour visualiser les données et aider à la prise de décision.
+L'outil extrait automatiquement des posts LinkedIn liés à des mots-clés spécifiques, les traite et les stocke dans une base de données PostgreSQL. Un tableau de bord a été créé dans Google Data Studio pour visualiser les données .
 
 ## **Fonctionnalités**
 
@@ -24,10 +24,11 @@ L'outil extrait automatiquement des posts LinkedIn liés à des mots-clés spéc
 
 ## **Prérequis**
 
-Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
+Avant de commencer, assurez-vous d'avoir les éléments suivants :
 
+- Un compte Linkedin
 - Python 3.x
-- PostgreSQL
+- Jupyter Notebook ou tout autre éditeur de editeur de code
 - Google Data Studio (pour visualiser les données)
 
 ## **Installation**
@@ -36,7 +37,6 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 ```bash
 git clone https://github.com/votre-utilisateur/projet-caf.git
-cd projet-caf
 ```
 
 ### 2. Créer un environnement virtuel et l'activer
@@ -64,25 +64,28 @@ DB_HOST=localhost
 DB_NAME=your_db_name
 DB_USER=your_username
 DB_PASSWORD=your_password
-MY_LIST=cybersécurité,IA,Afrique
+USERNAME=your_linkedin_usernameoremail
+PASSWORD=your_linkedin_password
+MOTS_CLES=cybersécurité,IA,Afrique
 ```
 
 ### 5. Configuration de la base de données
 
-Créez une base de données PostgreSQL locale ou utilisez un service comme [Aiven](https://aiven.io/) pour héberger la base. Vous pouvez adapter les informations de connexion dans le fichier `.env`.
+Créez une base de données PostgreSQL locale ou utilisez un service comme [Aiven](https://aiven.io/) pour stocker les données. Vous pouvez adapter les informations de connexion dans le fichier `.env`.
 
 ### 6. Lancer le script d'extraction
 
 Vous pouvez exécuter le script dans un notebook Jupyter ou dans un script Python classique pour commencer l'extraction des posts LinkedIn en fonction des mots-clés.
 
+Via le notebook
 ```bash
 jupyter notebook
 ```
 
-Ou directement via un script :
+Ou directement via le fichier python :
 
 ```bash
-python extraction.py
+python getdata.py
 ```
 
 ## **Utilisation**
