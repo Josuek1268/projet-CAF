@@ -62,6 +62,7 @@ try:
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP )'''
     cursor.execute(sql)
     connection.commit()
+    cursor.close()
     print("Connexion réussie à la base de données")
     
 except Exception as e:
@@ -147,10 +148,9 @@ def clean_text(text):
 # In[ ]:
 
 
-while True:
-    authors, contents, dates, likes, shares, comments = [], [], [], [], [], []
-    
+while True:  
     for word in keywords:
+        authors, contents, dates, likes, shares, comments = [], [], [], [], [], []
         search_input = driver.find_element(By.CLASS_NAME, "search-global-typeahead__input")
         search_input.clear()
         search_input.send_keys(word)
@@ -234,6 +234,8 @@ while True:
                     months = int(re.search(r'(\d+)\s*mois', item).group(1))
                     new_date = (now - relativedelta(months=months)).strftime('%Y-%m-%d')
                     dates.append(new_date)
+                    
+        cursor = connection.cursor()
         
         for author, content, like, share, comment ,post_date in zip (authors , contents ,likes ,shares,comments, dates):
             sql_check = '''SELECT COUNT(*) FROM INPOSTS WHERE author = %s AND content = %s AND post_date = %s'''
@@ -242,10 +244,18 @@ while True:
             cursor.execute(sql_check, (author, content, post_date))
             exists = cursor.fetchone()[0]
             if exists == 0:  
-                    cursor.execute(sql_insert, (author, content,like,share,comment, post_date, word)) 
+                try:
+                    cursor.execute(sql_insert, (author, content, like, share, comment, post_date, word))
                     connection.commit()
-                    print(f"Post ajouté: {author} - {content} - {post_date} \n")
-    
+                    print(f"Post ajouté: {author} - {content} - {post_date} -{word} \n")
+                except Exception as e:
+                    print(f"Erreur lors de l'insertion du post: {e}")
+                    connection.rollback()
+
+            else:
+                print("Ce post existe déjà")
+
+        cursor.close()
         time.sleep(10)
 
 
